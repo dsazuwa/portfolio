@@ -3,6 +3,7 @@ import {
   EnvelopeClosedIcon,
   GitHubLogoIcon,
   HamburgerMenuIcon,
+  MinusIcon,
 } from '@radix-ui/react-icons';
 import { useState } from 'react';
 import clsx from 'clsx';
@@ -35,18 +36,25 @@ export default function Navbar({ className }: { className: string }) {
     >
       <a className='text-lg font-semibold capitalize'>Danielle</a>
 
-      <div className='hidden text-xs md:flex md:flex-col md:space-y-2'>
+      <div className='hidden w-full text-xs font-medium hover:text-slate-300 md:flex md:flex-col'>
         {sections.map(({ label, href }, i) => (
           <a
             key={`section-${i}`}
             href={href}
-            className='flex py-1'
+            className='group relative flex py-2.5 transition-all hover:text-black'
             onClick={() => setValue(i)}
           >
-            <span>{label}</span>
-            {i === value && (
-              <div className='ml-0.5 h-1.5 w-1.5 rounded-full bg-secondary' />
-            )}
+            <div className='flex w-full translate-x-[0px] flex-row transition-all group-hover:translate-x-[20px]'>
+              <span>{label}</span>
+
+              {i === value && (
+                <div className='ml-0.5 h-1.5 w-1.5 rounded-full bg-secondary' />
+              )}
+            </div>
+
+            <div className='absolute flex items-center overflow-hidden'>
+              <MinusIcon className='mr-1 w-4 translate-x-[-20px] transition-all group-hover:translate-x-[0px]' />
+            </div>
           </a>
         ))}
       </div>
